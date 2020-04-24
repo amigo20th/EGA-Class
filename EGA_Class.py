@@ -40,6 +40,7 @@ def annularCross(I_double, n, n_vars, Pc):
 def mutation(I_double, n, n_var, n_class,B2M):
     I_tmp = np.copy(I_double)
     for count in range(B2M):
+        string = ''
         p1 = np.random.randint(0, n)
         p2 = np.random.randint(0, n_var)
         print("mutación: ({}, {})".format(p1, p2))
@@ -48,7 +49,10 @@ def mutation(I_double, n, n_var, n_class,B2M):
         tmp[p2] = np.random.randint(0, n_class)
         while mut_comp == tmp[p2]:
             tmp[p2] = np.random.randint(0, n_class)
-        I_tmp[p1] = ''.join(str(tmp))
+        for i in tmp:
+            print(type(string))
+
+        #I_tmp[p1][0] = np.array(''.join(str(tmp)))
 
     return I_tmp
 
