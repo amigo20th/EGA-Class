@@ -49,6 +49,7 @@ def mutation(I_double, n, n_var, n_class,B2M):
         while mut_comp == tmp[p2]:
             tmp[p2] = np.random.randint(0, n_class)
         I_tmp[p1] = ''.join(str(tmp))
+
     return I_tmp
 
 
