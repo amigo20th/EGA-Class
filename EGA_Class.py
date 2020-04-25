@@ -43,28 +43,19 @@ def mutation(I_double, n, n_var, n_class,B2M):
         string = ''
         p1 = np.random.randint(0, n)
         p2 = np.random.randint(0, n_var)
-        print("mutación: ({}, {})".format(p1, p2))
         tmp = list(I_tmp[p1][0])
         mut_comp = tmp[p2]
         tmp[p2] = np.random.randint(0, n_class)
-        while mut_comp == tmp[p2]:
+        while str(mut_comp) == str(tmp[p2]):
             tmp[p2] = np.random.randint(0, n_class)
-        for i in tmp:
-            print(type(string))
-
-        #I_tmp[p1][0] = np.array(''.join(str(tmp)))
-
+        for k in range(len(tmp)):
+            string += str(tmp[k])
+        I_tmp[p1][0] = string
     return I_tmp
 
 
 
-I = genInitPop(4, 10, 3)
-I_double = np.concatenate((I, I), axis=0)
-print("Antes: ")
-print(I_double)
-I_double = mutation(I_double, 4, 10, 3, 4)
-print("Después: ")
-print(I_double)
+
 
 #
 # ### Variables for flexibility of the algorithm
