@@ -7,23 +7,18 @@ url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'
 
 df = pd.read_csv(url, names=['sepal_len', 'sepal_wid', 'petal_len', 'petal_wid',
                              'target'])
-df.loc[df['target'] == 'Iris-setosa'] = 0
-df.loc[df['target'] == 'Iris-versicolor'] = 1
-df.loc[df['target'] == 'Iris-virginica'] = 2
-target = df.target
 df = df.drop(['target'], axis=1)
-print(df)
-print(target)
 
 
 def dmin(x_point, y_array):
     # This function returns the minimum distance between two points
     # the distance is euclidean
     # x exists in y_array because they are from the same cluster
-    y_a_list = list(y_array)
-    y_a_list.remove(x_point)
+    spam = y_array.tolist()
+    del(spam[spam.index(list(x_point))])
+    y_a_tmp = np.array(spam)
     list_dist = []
-    for y_point in y_a_list:
+    for y_point in y_a_tmp:
         list_dist.append(distance.euclidean(x_point, y_point))
     return min(list_dist)
 
@@ -46,6 +41,22 @@ def variance_cluster(cluster):
 
 # def VNND():
 # pendent
+np.random.seed(10)
 
-
-fitness_VNND(index_cluster)_
+def fitness(index_cluster):
+    list_var_clus = []
+    target_str = list(index_cluster)
+    target = [int(x) for x in target_str]
+    df_tmp = df
+    df_tmp['target'] = target
+    clus_0 = pd.DataFrame(df_tmp.loc[df_tmp['target'] == 0])
+    clus_1 = pd.DataFrame(df_tmp.loc[df_tmp['target'] == 1])
+    clus_2 = pd.DataFrame(df_tmp.loc[df_tmp['target'] == 2])
+    clus_0 = clus_0.drop(['target'], axis=1)
+    clus_1 = clus_1.drop(['target'], axis=1)
+    clus_2 = clus_2.drop(['target'], axis=1)
+    clus_0_np = clus_0.values
+    clus_1_np = clus_1.values
+    clus_2_np = clus_2.values
+    vnnd = variance_cluster(clus_0_np) + variance_cluster(clus_1_np) + variance_cluster(clus_2_np)
+    return vnnd
