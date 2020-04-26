@@ -18,14 +18,19 @@ def dmin(x_point, y_array):
 def prom_dmin_c(cluster):
     list_dist = []
     for elem_c in cluster:
-
         list_dist.append(dmin(elem_c, cluster))
     dist_sum = sum(list_dist)
     return dist_sum/len(cluster)
 
+def variance_cluster(cluster):
+    list_var = []
+    p_dmin_c = prom_dmin_c(cluster)
+    for elem_c in cluster:
+        list_var.append((dmin(elem_c, cluster) - p_dmin_c)**2)
+    print(list_var)
+    return (1 / (len(cluster) - 1)) * sum(list_var)
 
+def VNND()
 
-
-
-print(prom_dmin_c(y_array))
+print(variance_cluster(y_array))
 
