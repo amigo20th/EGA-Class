@@ -64,9 +64,9 @@ n_vars = 150
 n_class = 3
 ## Variables what EGA needs
 # Number of generations
-G = 2
+G = 100
 # Number of individuals
-n = 4
+n = 50
 # Length of chromosome
 L = n_vars
 # Population
@@ -87,13 +87,9 @@ I_double = np.ndarray(shape=(2 * n, n_vars), dtype=np.int16)
 fitness_double = np.ndarray(shape=(2, 2 * n), dtype=float)
 
 # Initial population
-I = genInitPop(n, n_vars)
+I = genInitPop(n, n_vars, n_class)
 
-# # Save a best of the all generation
-# champ = np.ndarray(shape=(n, n_vars), dtype= np.int16)
-# champ = champ[0]
-# champ = list(range(n_vars))
-# fit_champ = Fitness_TSP.fitness(champ)
+
 
 for gen in range(G):
     # Double of length of the population
@@ -103,17 +99,16 @@ for gen in range(G):
     I_double = annularCross(I_double, n, n_vars, Pc)
 
     # Apply Mutation
-    I_double = mutation(I_double, len(I_double), n_vars, B2M)
+    I_double = mutation(I_double, n, n_vars, n_class, B2M)
 
     # Apply fitness
     count = 0
     for i in range(fitness_double.shape[1]):
         fitness_double[0][i] = count
-        fitness_double[1][i] = vnnd.fitness(I_double[i])
+        fitness_double[1][i] = vnnd.fitness(I_double[i][0])
         count += 1
     # Order by fitness
     fitness_double = fitness_double[:, fitness_double[1].argsort()]
-
 
     # Apply Elitism
     ind_eli = fitness_double[0][0:n]
@@ -122,25 +117,8 @@ for gen in range(G):
     for i in ind_eli:
         I[count] = I_double[i]
         count += 1
-    print("best way {}, Best Travel Cost= {}".format(list(I[0]), fitness_double[1][0]))
+    print("VNND= {}".format(fitness_double[1][0]))
 
-    # we compare the best of this generation with the champ
-    if fitness_double[1][0] < fit_champ:
-        champ = I[0]
-        fit_champ = fitness_double[1][0]
-        print("nuevo champ")
-
-way = list(champ)
-way.append(way[0])
 print("Aproaches: ")
-print(list(way), fit_champ)
-print()
+print(fitness_double[1][0])
 
-points = Fitness_TSP.return_points(way)
-
-plt.plot(points[0], points[1])
-plt.title("Traveling Salesman Problem")
-plt.scatter(points[0], points[1], c='red')
-for inx, poi  in enumerate(I[0]):
-    plt.annotate(poi, (points[0][inx]+0.3, points[1][inx]+0.3))
-plt.show()
