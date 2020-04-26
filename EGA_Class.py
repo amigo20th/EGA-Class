@@ -61,7 +61,7 @@ def mutation(I_double, n, n_var, n_class,B2M):
 # ### Variables for flexibility of the algorithm
 # # number of variables for one solution
 # # in this case, we have the number of rows in the Dataset
-# n_vars = 50
+# n_vars = 150
 # # Number of classes in the Dataset
 # n_class = 3
 # ## Variables what EGA needs
