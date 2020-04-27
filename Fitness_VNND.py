@@ -1,6 +1,8 @@
 import numpy as np
 from scipy.spatial import distance
 import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'
 
@@ -54,7 +56,6 @@ def variance_cluster(cluster):
 
 # def VNND():
 # pendent
-np.random.seed(10)
 
 def fitness(index_cluster):
     list_var_clus = []
@@ -70,3 +71,11 @@ def fitness(index_cluster):
     clus_2_np = list(clus_2.index)
     vnnd = variance_cluster(clus_0_np) + variance_cluster(clus_1_np) + variance_cluster(clus_2_np)
     return vnnd
+
+def plot_cluster(index_cluster):
+    target_str = list(index_cluster)
+    target = [int(x) for x in target_str]
+    df['target'] = target
+    sns.pairplot(df, hue='target')
+    plt.show()
+

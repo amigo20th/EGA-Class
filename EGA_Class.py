@@ -1,7 +1,6 @@
 import numpy as np
 import Fitness_VNND as vnnd
 
-
 def genInitPop(individuals, var, n_class):
     # This function create the first population
     tmp_pop = np.ndarray(shape=(individuals, 1), dtype=('U', var))
@@ -64,9 +63,9 @@ n_vars = 150
 n_class = 3
 ## Variables what EGA needs
 # Number of generations
-G = 100
+G = 1300
 # Number of individuals
-n = 50
+n = 100
 # Length of chromosome
 L = n_vars
 # Population
@@ -121,4 +120,5 @@ for gen in range(G):
 
 print("Aproaches: ")
 print(fitness_double[1][0])
+vnnd.plot_cluster(I[0][0])
 
