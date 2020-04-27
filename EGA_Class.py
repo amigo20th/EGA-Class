@@ -97,6 +97,7 @@ for gen in range(G):
     # Apply Annular Crossover
     I_double = annularCross(I_double, n, n_vars, Pc)
 
+
     # Apply Mutation
     I_double = mutation(I_double, n, n_vars, n_class, B2M)
 

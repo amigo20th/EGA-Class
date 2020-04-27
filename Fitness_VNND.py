@@ -57,6 +57,7 @@ def variance_cluster(cluster):
 # def VNND():
 # pendent
 
+
 def fitness(index_cluster):
     list_var_clus = []
     target_str = list(index_cluster)
