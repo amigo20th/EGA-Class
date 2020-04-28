@@ -12,18 +12,15 @@ df = df.drop(['target'], axis=1)
 
 points = df.values
 matrix_dist = np.ndarray(shape=(df.shape[0], df.shape[0]), dtype=np.float)
-#print(points)
 for row in range(df.shape[0]):
     for col in range(df.shape[0]):
         matrix_dist[row][col] = distance.euclidean(points[row], points[col])
-#print(matrix_dist)
+
 
 def dmin(x_index_point, clus_index):
     # This function returns the minimum distance between two points
     # the distance is euclidean
     # x exists in y_array because they are from the same cluster
-
-    #pasamos a lista los indices del cluster
     list_index_c = list(clus_index)
     del(list_index_c[list_index_c.index(x_index_point)])
     dist = []
@@ -31,11 +28,6 @@ def dmin(x_index_point, clus_index):
         dist.append(matrix_dist[x_index_point][ind])
     return min(dist)
 
-    # y_a_tmp = np.array(spam)
-    # list_dist = []
-    # for y_point in y_a_tmp:
-    #     list_dist.append(distance.euclidean(x_point, y_point))
-    # return min(list_dist)
 
 
 def prom_dmin_c(cluster):
@@ -54,12 +46,8 @@ def variance_cluster(cluster):
         list_var.append((dmin(elem_c, cluster) - p_dmin_c) ** 2)
     return (1 / (len(cluster) - 1)) * sum(list_var)
 
-# def VNND():
-# pendent
-
 
 def fitness(index_cluster):
-    list_var_clus = []
     target_str = list(index_cluster)
     target = [int(x) for x in target_str]
     df_tmp = df
