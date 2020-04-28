@@ -65,7 +65,7 @@ n_class = 3
 # Number of generations
 G = 3000
 # Number of individuals
-n = 100
+n = 200
 # Length of chromosome
 L = n_vars
 # Population
@@ -73,7 +73,7 @@ I = np.ndarray(shape=(n, n_vars), dtype=np.int16)
 # Crossing probability
 Pc = 0.9
 # Mutation probability
-Pm = 0.1
+Pm = 0.05
 # list of fitness
 fitness = np.ndarray(shape=(2, n), dtype=float)
 # Expected number of mutations for each generation
