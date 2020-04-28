@@ -88,8 +88,6 @@ fitness_double = np.ndarray(shape=(2, 2 * n), dtype=float)
 # Initial population
 I = genInitPop(n, n_vars, n_class)
 
-
-
 for gen in range(G):
     # Double of length of the population
     I_double = np.concatenate((I, I), axis=0)
