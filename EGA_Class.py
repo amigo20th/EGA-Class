@@ -9,8 +9,15 @@ def genInitPop(individuals, var, n_class):
         for v in range(var):
             gen += str(np.random.randint(0, n_class))
         tmp_pop[ind] = gen
+    kmeans_res = vnnd.populationInitial(n_class)
+    gen = ''
+    for i in kmeans_res:
+        gen += str(i)
+    tmp_pop[0] = gen
+    tmp_pop[1] = gen
+    tmp_pop[2] = gen
+    print(tmp_pop)
     return tmp_pop
-
 
 def annularCross(I_double, n, n_vars, Pc):
     # This function apply Deterministic Annular Crossover to the population
@@ -63,9 +70,9 @@ n_vars = 150
 n_class = 3
 ## Variables what EGA needs
 # Number of generations
-G = 3000
+G = 100
 # Number of individuals
-n = 200
+n = 300
 # Length of chromosome
 L = n_vars
 # Population
@@ -88,13 +95,14 @@ fitness_double = np.ndarray(shape=(2, 2 * n), dtype=float)
 # Initial population
 I = genInitPop(n, n_vars, n_class)
 
+
+
 for gen in range(G):
     # Double of length of the population
     I_double = np.concatenate((I, I), axis=0)
 
     # Apply Annular Crossover
     I_double = annularCross(I_double, n, n_vars, Pc)
-
 
     # Apply Mutation
     I_double = mutation(I_double, n, n_vars, n_class, B2M)
@@ -120,4 +128,3 @@ for gen in range(G):
 print("Aproaches: ")
 print(fitness_double[1][0])
 vnnd.plot_cluster(I[0][0])
-

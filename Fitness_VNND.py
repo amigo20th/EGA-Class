@@ -3,11 +3,14 @@ from scipy.spatial import distance
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
+
 
 url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'
 
 df = pd.read_csv(url, names=['sepal_len', 'sepal_wid', 'petal_len', 'petal_wid',
                              'target'])
+target = df.target
 df = df.drop(['target'], axis=1)
 
 points = df.values
@@ -37,15 +40,12 @@ def prom_dmin_c(cluster):
     dist_sum = sum(list_dist)
     return dist_sum / len(cluster)
 
-
-
 def variance_cluster(cluster):
     list_var = []
     p_dmin_c = prom_dmin_c(cluster)
     for elem_c in cluster:
         list_var.append((dmin(elem_c, cluster) - p_dmin_c) ** 2)
     return (1 / (len(cluster) - 1)) * sum(list_var)
-
 
 def fitness(index_cluster):
     target_str = list(index_cluster)
@@ -67,4 +67,8 @@ def plot_cluster(index_cluster):
     df['target'] = target
     sns.pairplot(df, hue='target')
     plt.show()
+
+def populationInitial(n_class):
+    kmeans = KMeans(n_clusters=n_class, max_iter=300).fit(df)
+    return kmeans.labels_
 
