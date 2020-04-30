@@ -39,8 +39,6 @@ def annularCross(I_double, n, n_vars, Pc):
             I_tmp[n - count - 1][0] = str(tmp_str2)
     return I_tmp
 
-
-
 def mutation(I_double, n, n_var, n_class,B2M):
     I_tmp = np.copy(I_double)
     for count in range(B2M):
@@ -56,10 +54,6 @@ def mutation(I_double, n, n_var, n_class,B2M):
             string += str(tmp[k])
         I_tmp[p1][0] = string
     return I_tmp
-
-
-
-
 
 
 ### Variables for flexibility of the algorithm
@@ -94,8 +88,6 @@ fitness_double = np.ndarray(shape=(2, 2 * n), dtype=float)
 
 # Initial population
 I = genInitPop(n, n_vars, n_class)
-
-
 
 for gen in range(G):
     # Double of length of the population

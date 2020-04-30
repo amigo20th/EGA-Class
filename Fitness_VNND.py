@@ -5,7 +5,6 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 
-
 url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'
 
 df = pd.read_csv(url, names=['sepal_len', 'sepal_wid', 'petal_len', 'petal_wid',
@@ -19,7 +18,6 @@ for row in range(df.shape[0]):
     for col in range(df.shape[0]):
         matrix_dist[row][col] = distance.euclidean(points[row], points[col])
 
-
 def dmin(x_index_point, clus_index):
     # This function returns the minimum distance between two points
     # the distance is euclidean
@@ -30,8 +28,6 @@ def dmin(x_index_point, clus_index):
     for ind in list_index_c:
         dist.append(matrix_dist[x_index_point][ind])
     return min(dist)
-
-
 
 def prom_dmin_c(cluster):
     list_dist = []
@@ -71,4 +67,3 @@ def plot_cluster(index_cluster):
 def populationInitial(n_class):
     kmeans = KMeans(n_clusters=n_class, max_iter=300).fit(df)
     return kmeans.labels_
-
